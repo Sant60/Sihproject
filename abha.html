@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <title>Patients portal</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: rgb(56, 19, 190);
+        font-family: sans-serif;
+        background-size: cover;
+      }
+
+      .right {
+        width: 78vw;
+        height: 97vh;
+        background: rgb(229, 226, 226);
+        margin: -45% 0 0 21vw;
+        opacity: 0;
+        /* position: fixed;
+        top: 68px;
+        left: -250px;
+        z-index: 2; */
+        border-radius: 20px;
+        transform: translate(100%, -50%) scale(0);
+        transition: transform 1s, top 1s;
+        /* position: fixed; */
+      }
+      .navli {
+        color: white;
+        width: 20vw;
+        height: 100vh;
+        margin: 100px 0 0 0;
+        /* background: rgb(87, 37, 250); */
+      }
+      .navli li {
+        padding: 100px 0 0 74px;
+        font-size: 27px;
+        cursor: pointer;
+        /* background: rgb(29, 27, 27); */
+        text-align: center;
+        position: relative;
+        width: 265px;
+        height: 50px;
+        margin: 0 0 0 18px;
+        display: inline-flex;
+        /* padding-right: 39px; */
+        /* border: 2px solid white; */
+      }
+      .navli li:hover {
+        border: 2px solid white;
+        /* background: rgb(51, 10, 119); */
+      }
+      .navli li i {
+        margin: 0 0 0 10px;
+      }
+
+      .navbar {
+        width: 76vw;
+        height: 100px;
+        background-color: rgb(255, 255, 255);
+        margin: 0px 0 0 22px;
+        border-radius: 20px;
+      }
+      .divitem {
+        width: 54vw;
+        height: 18vh;
+        /* background: yellow; */
+        margin: 14px 0 0 22px;
+        position: absolute;
+        top: 10%;
+      }
+      .divitem span {
+        height: 150px;
+        width: 280px;
+        background: rgb(61, 9, 181);
+        /* position: relative; */
+        display: inline-flex;
+        /* flex-direction: column; */
+        margin: 10px;
+        border-radius: 20px;
+      }
+      .rside {
+        width: 23vw;
+        height: 84vh;
+        background: rgb(255, 255, 255);
+        position: absolute;
+        top: 10%;
+        margin: 19px 0 0 69%;
+        border-radius: 20px;
+      }
+      .mside {
+        width: 32vw;
+        height: 45vh;
+        position: absolute;
+        margin: 12% 0 0 23%;
+        top: 10%;
+      }
+      .mside span {
+        width: 95%;
+        height: 45%;
+        background: white;
+        /* position: absolute; */
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 22px;
+        margin-top: 10px;
+        margin-left: 15px;
+        border-radius: 20px;
+      }
+      .sidebar {
+        height: 750px;
+        width: 300px;
+        margin: 170px 0 0 23px;
+        position: absolute;
+        top: 11%;
+      }
+      .sidebar span {
+        width: 300px;
+        height: 365px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        border-radius: 20px;
+      }
+      #sspan {
+        margin-top: 7%;
+      }
+      #sspan img {
+        width: 21vw;
+        margin: 36px 0 0 -47px;
+      }
+      .md1 {
+        width: 265px;
+        height: 245px;
+        background: white;
+        margin: -16% 0 0 2%;
+        border-radius: 20px;
+      }
+      .md2 {
+        width: 265px;
+        height: 245px;
+        background: white;
+        margin: -16% 0 0 14%;
+        border-radius: 20px;
+      }
+      /* .navbar input {
+        width: 500px;
+        height: 60px;
+        margin: 18px 0 0 30px;
+        padding-inline-start: 40px;
+      } */
+
+      .search {
+        width: 36%;
+        height: 52px;
+        background-color: white;
+        margin: 22px 0 0 3%;
+        border-radius: 10px;
+        position: absolute;
+        border: 1px solid black;
+      }
+      .input {
+        color: var(--color-realbox-foreground);
+        font-family: sans-serif;
+        font-size: inherit;
+        height: 52px;
+        outline: 0;
+        padding-inline-start: 3px;
+        position: relative;
+        width: 79%;
+        border: none;
+      }
+      input[type="search"]-webkit-search-cancel-button {
+        display: none;
+      }
+      .fa-magnifying-glass {
+        margin: 10px 6px 0 23px;
+      }
+      .pdata {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        margin: 9px 0 0 30px;
+        color: white;
+        list-style: none;
+        font-size: 20px;
+      }
+      .pdata h2 {
+        padding-inline: 20px;
+        width: 15vw;
+        margin: 0 0 0 -28px;
+      }
+      .rside img {
+        width: 36vw;
+        margin: -12% 0 0 -28%;
+      }
+      .mside span img {
+        width: 29vw;
+        height: 19vh;
+        margin: -19px 0 0 12px;
+        image-orientation: cover;
+      }
+      .md2 img {
+        width: 12vw;
+        margin: 8px 0 0 20px;
+      }
+      #flow {
+        width: 28vw;
+        height: 17vh;
+        margin: 0 0 0 21px;
+      }
+      .check {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        background: #1de716;
+      }
+      .notitem {
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 0 15px;
+        list-style: none;
+      }
+      .notitem li {
+        padding-bottom: 30px;
+        color: solid black;
+        font-size: 20px;
+      }
+      .md1 img {
+        width: 13vw;
+        margin: 0 0 0 12px;
+      }
+      #dashtext {
+        cursor: pointer;
+      }
+      .right.active {
+        left: 0;
+        transform: translate(-1%, -35%) scale(1);
+        pointer-events: auto;
+      }
+      /* .lsidebar {
+        margin: 0 0 0 0;
+        background: #b26e6e;
+        width: 100px;
+        height: 1000px;
+      } */
+      #logo {
+        width: 18vw;
+        position: fixed;
+        margin: -80px 0 0 0;
+      }
+      .maind {
+        width: 70vw;
+        height: 90vh;
+        /* background: rgb(37, 36, 36); */
+        padding-inline: 50px;
+        margin: 10% 0 0 3%;
+      }
+      .maind span {
+        width: 20%;
+        height: 28%;
+        background: rgb(255, 255, 255);
+        margin: 32px 0 0 52px;
+        display: inline-flex;
+        position: static;
+        border-radius: 20px;
+      }
+      .wrapper {
+        width: 83%;
+        height: 100%;
+        background: rgb(218, 216, 216);
+        margin: -91% 0 0 21%;
+        position: absolute;
+        border-radius: 20px;
+        opacity: 0;
+        transform: translate(100%, -50%) scale(0);
+        transition: transform 1s, top 1s;
+      }
+      .wrapper.active {
+        left: 0;
+        transform: translate(-1%, 18%) scale(1);
+        pointer-events: auto;
+      }
+      .wrapper h1 {
+        color: rgb(0, 0, 0);
+        position: absolute;
+        margin: 8% 0 0 5%;
+      }
+      .maind span img {
+        width: 7vw;
+        position: absolute;
+        background: white;
+        border-radius: 20px;
+        margin: 8px 0 0 58px;
+      }
+      .maind span h2 {
+        position: absolute;
+        margin: 10% 0 0 40px;
+      }
+      .maind span button {
+        position: absolute;
+        margin: 14% 0 0 2%;
+        width: 200px;
+        height: 50px;
+        background: #82078a;
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+      .maind span button:hover {
+        background: #416be8;
+      }
+      .maind span p {
+        position: absolute;
+        margin: 12% 0 0 5%;
+        font-weight: bold;
+      }
+      .navbar {
+        width: 77vw;
+        height: 100px;
+        background-color: rgb(255, 255, 255);
+        margin: 0px 0 0 6px;
+        border-radius: 20px;
+        position: absolute;
+      }
+      .search {
+        width: 30%;
+        height: 52px;
+        background-color: white;
+        margin: 22px 0 0 3%;
+        border-radius: 8px;
+        position: absolute;
+        border: 2px solid black;
+      }
+      .input {
+        color: var(--color-realbox-foreground);
+        font-family: sans-serif;
+        font-size: inherit;
+        height: 52px;
+        outline: 0;
+        padding-inline-start: 3px;
+        position: absolute;
+        width: 79%;
+        border: none;
+        border-radius: 20px;
+      }
+      .search .fa-magnifying-glass {
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .wrapper.search .input .fa-magnifying-glass {
+        font-size: 20px;
+        cursor: pointer;
+        margin: 0 0 0 20%;
+      }
+      .md {
+        position: absolute;
+        top: 80%;
+        left: 23%;
+        display: inline-flex;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="ded.png" id="logo" />
+    <ul class="navli">
+      <li id="home">Dashboard <i class="fa-solid fa-house"></i></li>
+      <li id="dashtext">Patients <i class="fa-solid fa-bed-pulse"></i></li>
+      <li>Schedules <i class="fa-regular fa-calendar-days"></i></li>
+      <li>messages <i class="fa-solid fa-message"></i></li>
+      <li id="doctors">collegues <i class="fa-solid fa-user-group"></i></li>
+    </ul>
+
+    <div class="right">
+      <div class="navbar">
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            class="input"
+            type="search"
+            placeholder="Search Appointments, Patients and etc."
+          />
+        </div>
+      </div>
+      <div class="p1wrap">
+        <div class="divitem">
+          <span>
+            <ul class="pdata">
+              <h2><i class="fa-solid fa-hospital-user"></i> Patients</h2>
+              <br />
+              <li>New Patients : 1200</li>
+
+              <li>Old patients : 1300</li>
+            </ul>
+          </span>
+          <span>
+            <ul class="pdata">
+              <h2><i class="fa-solid fa-venus-mars"></i> Genders</h2>
+              <br />
+              <li>New Patients :1700</li>
+
+              <li>Old patients: 800</li>
+            </ul>
+          </span>
+          <span>
+            <ul class="pdata">
+              <h2><i class="fa-solid fa-video"></i> Appointments</h2>
+              <br />
+              <li>Offline : 35</li>
+
+              <li>Online : 10</li>
+            </ul>
+          </span>
+        </div>
+        <div class="rside">
+          <img src="calender.png" />
+        </div>
+        <div class="mside">
+          <span>
+            <h2 style="color: rgb(121, 28, 193); margin: 2px 0 0 15px">
+              Number of Patients
+            </h2>
+            <img src="graph.png" />
+          </span>
+          <span>
+            <h2 style="color: rgb(121, 28, 193); margin: 2px 0 0 15px">
+              Patients visit by gender
+            </h2>
+            <img id="flow" src="flow.png" />
+          </span>
+        </div>
+        <div class="sidebar">
+          <span>
+            <h2 style="color: rgb(121, 28, 193); margin: 2px 0 0 15px">
+              Notes
+            </h2>
+            <ul class="notitem">
+              <li><input class="check" type="checkbox" />Diagnostics</li>
+              <li><input class="check" type="checkbox" />Analysis</li>
+              <li><input class="check" type="checkbox" />Dinner</li>
+              <li><input class="check" type="checkbox" />Swimming</li>
+              <li><input class="check" type="checkbox" />English</li>
+              <li>
+                <input class="check" type="checkbox" />Meetings with colleagues
+              </li>
+            </ul>
+          </span>
+          <span id="sspan">
+            <h2 style="color: rgb(121, 28, 193); margin: 2px 0 0 15px">
+              Perfomance
+            </h2>
+            <img src="piechart.png"
+          /></span>
+        </div>
+        <div class="md">
+          <div class="md1">
+            <h2 style="color: rgb(121, 28, 193); margin: 2px 0 0 15px">
+              Diagnosis
+            </h2>
+            <img src="circle.png" />
+          </div>
+          <div class="md2">
+            <h2 style="color: rgb(121, 28, 193); margin: 2px 0 0 15px">
+              Analytics
+            </h2>
+            <img src="analytics.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="navbar">
+        <div class="search">
+          <input
+            class="input"
+            type="search"
+            placeholder="Search Appointments, Patients and etc."
+          /><i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+      <h1>Hospital Doctors</h1>
+      <div class="maind">
+        <span>
+          <img src="d1.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button>
+        </span>
+        <span
+          ><img src="d2.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d3.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d4.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d1.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d4.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d3.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d2.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d1.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d2.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d3.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+        <span
+          ><img src="d4.png" />
+          <h2>Dr.jackson Han</h2>
+          <p>Surgeon</p>
+          <button>Send message</button></span
+        >
+      </div>
+    </div>
+    <script>
+      const dashboard = document.querySelector(".right");
+      const dashtext = document.querySelector("#dashtext");
+      const doctorsdiv = document.querySelector(".wrapper");
+      const colleagues = document.querySelector("#doctors");
+      const home = document.querySelector("#home");
+      dashtext.addEventListener("click", function () {
+        dashboard.classList.toggle("active");
+        doctorsdiv.classList.remove("active");
+        dashboard.style.opacity = "1";
+      });
+      colleagues.addEventListener("click", function () {
+        doctorsdiv.classList.toggle("active");
+        dashboard.classList.remove("active");
+        doctorsdiv.style.opacity = "1";
+      });
+      home.addEventListener("click", function () {
+        doctorsdiv.classList.remove("active");
+        dashboard.classList.remove("active");
+      });
+
+      // document.body.addEventListener("click", function (customEvent) {
+      //   // Check if the click was outside the hamburger menu and close the menu if it's open
+      //   if (
+      //     !sidebar.contains(customEvent.target) &&
+      //     !menuToggle.contains(customEvent.target)
+      //   ) {
+      //     sidebar.classList.remove("active");
+      //     menuToggle.classList.remove("active");
+      //   }
+      // });
+    </script>
+  </body>
+</html>
